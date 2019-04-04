@@ -84,11 +84,12 @@ function weatherBalloon(latitude, longitude ) {
 
             }
 var flag=0;
-var co=[72.9992,19.1944,74.1714532,19.6193998,74.8165054,20.5226352,74.8165054,20.5226352,72.995289,19.160262,72.88186,19.11452,73.022517,19.043717];
+var coh=[72.9992,19.1944,74.1714532,19.6193998,74.8165054,20.5226352,74.8165054,20.5226352,72.995289,19.160262,72.88186,19.11452,73.022517,19.043717];
+var co={{c|safe}};
 
 //
 
-console.log({{coord}});
+console.log({{c|safe}});
 co = co.concat({{coord}});
 mapboxgl.accessToken = 'pk.eyJ1IjoicGRuYWlrIiwiYSI6ImNqdHF1NHZ4bjA1Z3M0M3BsbjdmMm5iankifQ.iBLKK8ExatGKCwZyxpGhLw';
 var map = new mapboxgl.Map({
