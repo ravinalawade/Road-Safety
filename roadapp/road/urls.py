@@ -6,4 +6,5 @@ from .import views
 
 urlpatterns = [
 	path('',views.map,name='default'),
+	path('feed/',views.feed,name='feedback'),
 ]
