@@ -18,6 +18,7 @@ body { margin:0; padding:0; }
   cursor: pointer;
 }
 #b1{
+  top:500px;
   display:block;
   position: relative;
   margin: 0px auto;
@@ -32,6 +33,12 @@ body { margin:0; padding:0; }
 <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.0.0/mapbox-gl-directions.css' type='text/css' />
 <div id='map'></div>
  
+ <form method="POST">{% csrf_token %}
+<input type= "hidden" name="geoc1" id="g1" value="abc">
+<input type= "hidden" name="geoc2" id="g2" value="abc">
+<button id='b1' class="btn btn-danger">Prasad</button>
+</form>
+
 <script>
 
 function weatherBalloon(latitude, longitude ) {
@@ -64,9 +71,11 @@ function weatherBalloon(latitude, longitude ) {
             
             function showPosition(position) {
                 window.positionInfo = [position.coords.latitude, position.coords.longitude];
-                
+              document.getElementById("g1").value = positionInfo[0];
+              document.getElementById("g2").value = positionInfo[1];                
                 
             }
+
 
 
 var flag=0;
@@ -223,7 +232,6 @@ new mapboxgl.Marker(el)
 
 </script>
  
-<a type="button" id='b1' class="btn btn-danger" href=#soswebpage >Prasad</a>
 
 </body>
 </html>
