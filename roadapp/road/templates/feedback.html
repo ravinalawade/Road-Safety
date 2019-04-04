@@ -3,11 +3,102 @@
 	<title>Feedback</title>
 
 </head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
+      <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+<style>
+	        body{
+        padding-top:4.2rem;
+		padding-bottom:4.2rem;
+		background:rgba(0, 0, 255, 0.76);
+        }
+        a{
+         text-decoration:none !important;
+         }
+         h1,h2,h3{
+         font-family: 'Kaushan Script', cursive;
+         }
+          .myform{
+		position: relative;
+		display: -ms-flexbox;
+		display: flex;
+		padding: 1rem;
+		-ms-flex-direction: column;
+		flex-direction: column;
+		width: 100%;
+		pointer-events: auto;
+		background-color: #fff;
+		background-clip: padding-box;
+		border: 1px solid rgba(0,0,0,.2);
+		border-radius: 1.1rem;
+		outline: 0;
+		max-width: 500px;
+		 }
+         .tx-tfm{
+         text-transform:uppercase;
+         }
+         .mybtn{
+         border-radius:50px;
+         }
+        
+         .login-or {
+         position: relative;
+         color: #aaa;
+         margin-top: 10px;
+         margin-bottom: 10px;
+         padding-top: 10px;
+         padding-bottom: 10px;
+         }
+         .span-or {
+         display: block;
+         position: absolute;
+         left: 50%;
+         top: -2px;
+         margin-left: -25px;
+         background-color: #fff;
+         width: 50px;
+         text-align: center;
+         }
+         .hr-or {
+         height: 1px;
+         margin-top: 0px !important;
+         margin-bottom: 0px !important;
+         }
+         .google {
+         color:#666;
+         width:100%;
+         height:40px;
+         text-align:center;
+         outline:none;
+         border: 1px solid lightgrey;
+         }
+          form .error {
+         color: #ff0000;
+         }
+         #second{display:none;}
+</style>
 <body>
-	
-<form method='POST'>
-	{% csrf_token %}
-  <input type="text" id='opt' name="disaster" value="abc">
+    <div class="container">
+        <div class="row">
+			<div class="col-md-5 mx-auto">
+			<div id="first">
+				<div class="myform form ">
+					 <div class="logo mb-3">
+						 <div class="col-md-12 text-center">
+							<h1>FEEDBACK</h1>
+						 </div>
+					</div>
+                   <form method="POST">
+                   	{% csrf_token %}
+                           <div class="form-group">
+                              <input type="text" name="disaster"  class="form-control" id="email" value="abc">
  <select name = "patient" onchange="sele(this.value)">
    <option>select</option>
   <option  value=Earthquakes name='options' id='val'>Earthquakes</option>
@@ -18,19 +109,30 @@
 <script>
 function sele(va){
   var v=va
-  document.getElementById("opt").value = v;
-  console.log(document.getElementById("opt").value);
+  document.getElementById("email").value = v;
+  console.log(document.getElementById("email").value);
   console.log(va)
 }
 </script>
+                           </div>
+                           <div class="form-group">
+                              <label for="exampleInputEmail1">LONGITUDE</label>
+                              <input type="text" name="longitude" id="password"  value="{{lon}}" class="form-control">
+                           </div>
+                           
+                           <div class="form-group">
+                              <label for="exampleInputEmail1">LATITUDE</label>
+                              <input type="text" name="latitude" id="longitude"  value="{{lat}}" class="form-control">
+                           </div>
 
-<input type="pword" value="{{lon}}" name="longitude" required>
-<input type="pword" value="{{lat}}" name="latitude" required>
-<input type="text" placeholder="Enter Name" name="name" required>
-<button type="submit">Create Account</button>
-{{lon}}
-{{lat}}
-</form>
+                           <div class="form-group">
+                              <label for="exampleInputEmail1">NAME</label>
+                              <input type="text" name="name"  class="form-control">
+                           </div>
 
-	</body>
+                           <div class="col-md-12 text-center mb-3">
+                              <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">Update</button>
+         </div>
+     </form>
+</body>
 </html>
