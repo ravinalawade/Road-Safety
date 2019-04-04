@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+<head>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<style >
+  body {
+  font-family: monospace;
+  text-align: center;
+}
+
+a {
+  font-size: 24px;
+}
+
+code {
+  font-size: 18px;
+  line-height: 26px;
+  white-space: normal;
+  word-break: break-word;
+  background-color: lightgray;
+  padding: 5px;
+  border-radius: 4px;
+}
+
+h1 {
+  margin-bottom: 5%;
+}
+
+#b1 {
+margin-bottom :20px 
+
+}
+
+.btn{
+    padding: 10px 20px;
+    font-size: 30px;
+    border-radius: 10px;
+    width:70%;   //Specify your width here
+    padding:10% 0;
+
+}
+
+</style>
+</head>
+
+<body>
+  <h1> SOS</h1>
+  <hr>
+<script type="text/javascript">
+var positionInfo;
+  
+function getLocation() {
+
+            if (navigator.geolocation) {
+                navigator.geolocation.watchPosition(showPosition);
+            } else { 
+                y.innerHTML = "Geolocation is not supported by this browser.";
+            }
+            }
+                
+            function showPosition(position) {
+                positionInfo = [position.coords.latitude, position.coords.longitude];
+                return positionInfo[0] + ',' + positionInfo[1];
+            }
+
+</script>
+
+
+<br>
+<div id = "b1">
+<a type="button" class="btn btn-danger" href="tel:100">Police</a>
+</div>
+<div id = "b1">
+<a type="button" class="btn btn-danger" href="tel:108">Ambulance</a>
+</div>
+<div id = "b1">
+<a type="button" class="btn btn-danger" href="tel:181">Woman Helpline</a>
+</div>
+<div>
+<a  type= "button" class="btn btn-primary" href="sms:9867439610,sms:7039293193?body=https://www.google.com/maps/@{{lat}},{{lon}},15z">Help
+</a>
+</div>
+</body>

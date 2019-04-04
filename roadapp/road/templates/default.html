@@ -18,6 +18,7 @@ body { margin:0; padding:0; }
   cursor: pointer;
 }
 #b1{
+  top:500px;
   display:block;
   position: relative;
   margin: 0px auto;
@@ -32,7 +33,28 @@ body { margin:0; padding:0; }
 <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.0.0/mapbox-gl-directions.css' type='text/css' />
 <div id='map'></div>
  
+ <form method="POST">{% csrf_token %}
+<input type= "hidden" name="geoc1" id="g1" value="abc">
+<input type= "hidden" name="geoc2" id="g2" value="abc">
+<button id='b1' class="btn btn-danger">SOS</button>
+</form>
+
+
 <script>
+
+function weatherBalloon(latitude, longitude ) {
+  var key = 'b41265ae14fae548fdf54205e8b72133';
+    fetch('https://api.openweathermap.org/data/2.5/weather?lat=' + latitude + '&lon=' + longitude + '&appid=' + key) 
+      .then(function(resp) { return resp.json() }) // Convert data to json
+      .then(function(data) {
+        //console.log(data);
+        //console.log(data['weather'][0]['main']);
+        speakWeather(data['weather'][0]['main']);
+    })
+      .catch(function() {
+      // catch any errors
+  });
+}
 
            var y = document.getElementById("result");
             var x;
@@ -50,22 +72,11 @@ body { margin:0; padding:0; }
             
             function showPosition(position) {
                 window.positionInfo = [position.coords.latitude, position.coords.longitude];
-                
+              document.getElementById("g1").value = positionInfo[0];
+              document.getElementById("g2").value = positionInfo[1];                
                 
             }
 
-function weatherBalloon(latitude, longitude ) {
-  var key = 'b41265ae14fae548fdf54205e8b72133';
-    fetch('https://api.openweathermap.org/data/2.5/weather?lat=' + latitude + '&lon=' + longitude + '&appid=' + key) 
-      .then(function(resp) { return resp.json() }) // Convert data to json
-      .then(function(data) {
-        console.log(data);
-        console.log(data['weather'][0]['main']);
-    })
-      .catch(function() {
-      // catch any errors
-  });
-}
 
 
 var flag=0;
@@ -78,7 +89,7 @@ co = co.concat({{coord}});
 mapboxgl.accessToken = 'pk.eyJ1IjoicGRuYWlrIiwiYSI6ImNqdHF1NHZ4bjA1Z3M0M3BsbjdmMm5iankifQ.iBLKK8ExatGKCwZyxpGhLw';
 var map = new mapboxgl.Map({
 container: 'map',
-style: 'mapbox://styles/mapbox/streets-v11',
+style: 'mapbox://styles/omkar21/cju2q4eo50n2f1fqlq6iwla80',
 center: [-79.4512, 43.6568],
 zoom: 13
 });
@@ -209,10 +220,19 @@ new mapboxgl.Marker(el)
                 window.speechSynthesis.speak(msg);
             }
 
+            var y = "";
+            function speakWeather(x) {
+                if(x != window.y){
+                  window.y = x;
+                  var msg = new SpeechSynthesisUtterance(y);
+                  window.speechSynthesis.speak(msg);
+                }
+            }
+
+
 
 </script>
  
-<a type="button" id='b1' class="btn btn-danger" href=#soswebpage >Prasad</a>
 
 </body>
 </html>

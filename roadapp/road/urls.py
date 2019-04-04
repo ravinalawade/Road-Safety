@@ -5,5 +5,5 @@ from django.conf.urls.static import static
 from .import views
 
 urlpatterns = [
-	path('map/',views.map,name='default'),
-]
+	path('',views.map,name='default'),
+	]
