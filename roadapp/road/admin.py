@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Blackspot
-from .models import Sharpturn
+from .models import Landslide
 
 admin.site.register(Blackspot)
-admin.site.register(Sharpturn)
+admin.site.register(Landslide)
