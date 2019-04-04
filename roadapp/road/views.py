@@ -20,6 +20,7 @@ def map(request):
 		request.session['d2']=lon
 		print(lat,lon)
 		flag=int(request.POST.get('geoc3'))
+		print("flag"+str(flag))
 		if(flag==1):
 			url = reverse('feedback',kwargs={})
 			return HttpResponseRedirect(url)
