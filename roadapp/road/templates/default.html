@@ -7,6 +7,8 @@
 <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js'></script>
 <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css' rel='stylesheet' />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <style>
 body { margin:0; padding:0; }
 #map { position:absolute; top:0; bottom:0; width:100%; }
@@ -19,11 +21,12 @@ body { margin:0; padding:0; }
   cursor: pointer;
 }
 #b1{
-  top:500px;
+  top:700px;
+  right:700px;
   display:block;
   position: relative;
   margin: 0px auto;
-  width :20%;
+  width :100px;
 }
 </style>
 </head>
@@ -39,8 +42,8 @@ body { margin:0; padding:0; }
 <input type= "hidden" name="geoc2" id="g2" value="abc">
 <input type= "hidden" name="geoc3" id="g3" value="123">
 <br>
-<button id='b1' onclick="feed()">Feedback</button>
-<button id='b1' onclick="sos()" >SOS</button>
+<button id='b1' class="btn btn-primary" onclick="feed()">Feedback</button>
+<button id='b1' class="btn btn-primary" style="margin-top:10px" onclick="sos()" >SOS</button>
 </form>
 
 
