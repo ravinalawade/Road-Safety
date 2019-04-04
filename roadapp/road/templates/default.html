@@ -81,7 +81,7 @@ function weatherBalloon(latitude, longitude ) {
 
 var flag=0;
 var co=[72.9992,19.1944,74.1714532,19.6193998,74.8165054,20.5226352,74.8165054,20.5226352,72.995289,19.160262,72.88186,19.11452];
-
+//73.022517,19.043717
 console.log({{coord}});
 
 co = co.concat({{coord}});
@@ -215,16 +215,29 @@ new mapboxgl.Marker(el)
               return deg * (Math.PI/180)
             }
 
+            var z="";
             function speak(x){
-                var msg = new SpeechSynthesisUtterance(x);
-                window.speechSynthesis.speak(msg);
+                if(window.z != x){
+                  window.z = x;
+                  for(var i=0;i<3;i++){
+                    var msg = new SpeechSynthesisUtterance(x);
+                    window.speechSynthesis.speak(msg);
+                  }
+                }
             }
 
             var y = "";
             function speakWeather(x) {
                 if(x != window.y){
                   window.y = x;
-                  var msg = new SpeechSynthesisUtterance(y);
+                  var status;
+                  if(x=="Thunderstorm" || x=="Rain" || x=="Tornado" || x=="Snow" || x=="Fog") {
+                    status = "There is "+ window.y + " in the current region. Please drive safely";
+                  }
+                  else {
+                    status = "The weather is " + window.y;
+                  }
+                  var msg = new SpeechSynthesisUtterance(status);
                   window.speechSynthesis.speak(msg);
                 }
             }
