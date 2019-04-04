@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from road.models import Blackspot, Landslide
+from road.models import Blackspot, Landslide,Update
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from road.forms import Updateform
@@ -7,11 +7,19 @@ lat=0
 lon=0
 def map(request):
 	loc = Blackspot.objects.all()
+	loc1=Update.objects.all()
+	n1=len(loc1)
 	n = len(loc)
+	coord1=[]
 	coord = []
 	for i in range(n):
 		coord.append(loc[i].log)
 		coord.append(loc[i].lat)
+	for j in range(n1):
+		coord1.append(loc1[j].longitude)
+		coord1.append(loc1[j].latitude)
+	print(coord1)
+	print(loc1[1].longitude)
 
 	if (request.method == 'POST'):
 		lat = request.POST.get('geoc1')
@@ -26,7 +34,8 @@ def map(request):
 			return HttpResponseRedirect(url)
 		elif(flag==0):
 			return render(request,"sos.html",{'lat':lat,'lon':lon})
-	return render(request,"default.html",{'coord':coord})
+	print(coord1)
+	return render(request,"default.html",{'coord':coord,'c':coord1})
 
 
 def feed(request):
