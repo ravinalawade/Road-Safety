@@ -1,0 +1,36 @@
+<html>
+<head>
+	<title>Feedback</title>
+
+</head>
+<body>
+	
+<form method='POST'>
+	{% csrf_token %}
+  <input type="text" id='opt' name="disaster" value="abc">
+ <select name = "patient" onchange="sele(this.value)">
+   <option>select</option>
+  <option  value=Earthquakes name='options' id='val'>Earthquakes</option>
+  <option  value=Floods name='options' id='val'>Floods</option>
+  <option  value=Landslides name='options' id='val'>Landslides</option>
+</select>
+
+<script>
+function sele(va){
+  var v=va
+  document.getElementById("opt").value = v;
+  console.log(document.getElementById("opt").value);
+  console.log(va)
+}
+</script>
+
+<input type="pword" value="{{lon}}" name="longitude" required>
+<input type="pword" value="{{lat}}" name="latitude" required>
+<input type="text" placeholder="Enter Name" name="name" required>
+<button type="submit">Create Account</button>
+{{lon}}
+{{lat}}
+</form>
+
+	</body>
+</html>
