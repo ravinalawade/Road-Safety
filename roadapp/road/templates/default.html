@@ -40,7 +40,7 @@ body { margin:0; padding:0; }
 <input type= "hidden" name="geoc3" id="g3" value="123">
 <br>
 <button id='b1' onclick="feed()">Feedback</button>
-<button id='b1' class="btn btn-danger">SOS</button>
+<button id='b1' onclick="sos()" >SOS</button>
 </form>
 
 
@@ -84,9 +84,9 @@ function weatherBalloon(latitude, longitude ) {
 
             }
 var flag=0;
-var co=[72.9992,19.1944,74.1714532,19.6193998,74.8165054,20.5226352,74.8165054,20.5226352,72.995289,19.160262,72.88186,19.11452];
+var co=[72.9992,19.1944,74.1714532,19.6193998,74.8165054,20.5226352,74.8165054,20.5226352,72.995289,19.160262,72.88186,19.11452,73.022517,19.043717];
 
-//73.022517,19.043717
+//
 
 console.log({{coord}});
 co = co.concat({{coord}});
