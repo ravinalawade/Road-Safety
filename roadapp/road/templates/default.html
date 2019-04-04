@@ -215,9 +215,15 @@ new mapboxgl.Marker(el)
               return deg * (Math.PI/180)
             }
 
+            var z="";
             function speak(x){
-                var msg = new SpeechSynthesisUtterance(x);
-                window.speechSynthesis.speak(msg);
+                if(window.z != x){
+                  window.z = x;
+                  for(var i=0;i<3;i++){
+                    var msg = new SpeechSynthesisUtterance(x);
+                    window.speechSynthesis.speak(msg);
+                  }
+                }
             }
 
             var y = "";
