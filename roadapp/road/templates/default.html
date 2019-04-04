@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,24 +28,26 @@ body { margin:0; padding:0; }
 </style>
 </head>
 <body onload = 'getLocation()'>
- 
+
 <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.0.0/mapbox-gl-directions.js'>
 </script>
 <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.0.0/mapbox-gl-directions.css' type='text/css' />
 <div id='map'></div>
- 
+
  <form method="POST">{% csrf_token %}
 <input type= "hidden" name="geoc1" id="g1" value="abc">
 <input type= "hidden" name="geoc2" id="g2" value="abc">
-<button id='b1' class="btn btn-danger">SOS</button>
+<input type= "hidden" name="geoc3" id="g3" value="123">
+<br>
+<button id='b1' onclick="feed()">Feedback</button>
+<button id='b1' onclick="sos()" >SOS</button>
 </form>
 
 
 <script>
-
 function weatherBalloon(latitude, longitude ) {
   var key = 'b41265ae14fae548fdf54205e8b72133';
-    fetch('https://api.openweathermap.org/data/2.5/weather?lat=' + latitude + '&lon=' + longitude + '&appid=' + key) 
+    fetch('https://api.openweathermap.org/data/2.5/weather?lat=' + latitude + '&lon=' + longitude + '&appid=' + key)
       .then(function(resp) { return resp.json() }) // Convert data to json
       .then(function(data) {
         //console.log(data);
@@ -55,37 +58,38 @@ function weatherBalloon(latitude, longitude ) {
       // catch any errors
   });
 }
-
            var y = document.getElementById("result");
             var x;
             window.positionInfo = [0, 0];
-            
 
            function getLocation() {
             if (navigator.geolocation) {
                 navigator.geolocation.watchPosition(showPosition);
-            } else { 
+            } else {
                 y.innerHTML = "Geolocation is not supported by this browser.";
             }
             }
 
-            
+            function sos(){
+              document.getElementById("g3").value = 0;
+            }
+            function feed(){
+              document.getElementById("g3").value = 1;
+            }
+
             function showPosition(position) {
                 window.positionInfo = [position.coords.latitude, position.coords.longitude];
               document.getElementById("g1").value = positionInfo[0];
-              document.getElementById("g2").value = positionInfo[1];                
-                
+              document.getElementById("g2").value = positionInfo[1];
+
             }
-
-
-
 var flag=0;
-var co=[72.9992,19.1944,74.1714532,19.6193998,74.8165054,20.5226352,74.8165054,20.5226352,72.995289,19.160262,72.88186,19.11452];
+var co=[72.9992,19.1944,74.1714532,19.6193998,74.8165054,20.5226352,74.8165054,20.5226352,72.995289,19.160262,72.88186,19.11452,73.022517,19.043717];
+
+//
 
 console.log({{coord}});
-
 co = co.concat({{coord}});
-
 mapboxgl.accessToken = 'pk.eyJ1IjoicGRuYWlrIiwiYSI6ImNqdHF1NHZ4bjA1Z3M0M3BsbjdmMm5iankifQ.iBLKK8ExatGKCwZyxpGhLw';
 var map = new mapboxgl.Map({
 container: 'map',
@@ -93,49 +97,34 @@ style: 'mapbox://styles/omkar21/cju2q4eo50n2f1fqlq6iwla80',
 center: [-79.4512, 43.6568],
 zoom: 13
 });
- 
-
-
-
-
 
 map.on('load', function(position) {
 
-
-  
   var directions = new MapboxDirections({
    accessToken: mapboxgl.accessToken
   });
 
-  
-  
+
    var geolocate = new mapboxgl.GeolocateControl({positionOptions: {enableHighAccuracy: true},trackUserLocation: true});
    var pos;
    map.addControl(geolocate);
-
   map.addControl(directions, 'top-left');
-
 geolocate.on('geolocate', function(e) {
       var lon = e.coords.longitude;
       var lat= e.coords.latitude;
       var position = [lon, lat];
       getAlert(co,1);
       weatherBalloon(lat, lon);
-
       if(flag==0){
       directions.setOrigin(lon+','+lat);
       flag=1}
-      
+
 });
   //map.addControl(new mapboxgl.GeolocateControl({positionOptions: {enableHighAccuracy: true},trackUserLocation: true}));
 
-
-  
  // directions.setOrigin(positionInfo[1],positionInfo[0]);
-  
+
   });
-
-
 var i;
 var j;
 j=co.length;
@@ -149,13 +138,7 @@ new mapboxgl.Marker(el)
 }
 
 
- 
 
-                
-
-
-              
-          
 
             function getAlert(geocoordinates, id){
               //console.log(geocoordinates);
@@ -172,7 +155,6 @@ new mapboxgl.Marker(el)
                     }
                 }
             }
-
             function getSafeRoadwidth(w) { //w in meters
                 if(w<20){
                     document.getElementById("result").innerHTML = "Narrow road";
@@ -186,13 +168,13 @@ new mapboxgl.Marker(el)
             var lon1 = positionInfo[1];
             //console.log(positionInfo);
             var dLat = deg2rad(lat2-lat1);  // deg2rad below
-            var dLon = deg2rad(lon2-lon1); 
-            var a = 
+            var dLon = deg2rad(lon2-lon1);
+            var a =
                 Math.sin(dLat/2) * Math.sin(dLat/2) +
-                Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+                Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
                 Math.sin(dLon/2) * Math.sin(dLon/2)
-                ; 
-            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+                ;
+            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
             var d = R * c * 1000; // Distance in m
             if(d<1000){
               console.log("ghusla");
@@ -200,20 +182,18 @@ new mapboxgl.Marker(el)
                     //document.getElementById("result").innerHTML = "Blackspot nearby";
                     console.log("ajun aat ghusla");
                     speak("Blackspot nearby");
-
                 }
                 if(id==2){
                     //document.getElementById("result").innerHTML = "Sharp Turn";
                     speak("Sharp Turn");
                 }
-                
-            }
 
             }
-
+            }
             function deg2rad(deg) {
               return deg * (Math.PI/180)
             }
+
 
             var z="";
             function speak(x){
@@ -225,20 +205,22 @@ new mapboxgl.Marker(el)
                   }
                 }
             }
-
             var y = "";
             function speakWeather(x) {
                 if(x != window.y){
                   window.y = x;
-                  var msg = new SpeechSynthesisUtterance(y);
+                  var status;
+                  if(x=="Thunderstorm" || x=="Rain" || x=="Tornado" || x=="Snow" || x=="Fog") {
+                    status = "There is "+ window.y + " in the current region. Please drive safely";
+                  }
+                  else {
+                    status = "The weather is " + window.y;
+                  }
+                  var msg = new SpeechSynthesisUtterance(status);
                   window.speechSynthesis.speak(msg);
                 }
             }
-
-
-
 </script>
- 
 
 </body>
 </html>
