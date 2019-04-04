@@ -6,4 +6,4 @@ from .import views
 
 urlpatterns = [
 	path('',views.map,name='default'),
-]
+	]

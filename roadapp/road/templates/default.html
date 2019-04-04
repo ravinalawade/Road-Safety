@@ -36,8 +36,9 @@ body { margin:0; padding:0; }
  <form method="POST">{% csrf_token %}
 <input type= "hidden" name="geoc1" id="g1" value="abc">
 <input type= "hidden" name="geoc2" id="g2" value="abc">
-<button id='b1' class="btn btn-danger">Prasad</button>
+<button id='b1' class="btn btn-danger">SOS</button>
 </form>
+
 
 <script>
 
@@ -88,7 +89,7 @@ co = co.concat({{coord}});
 mapboxgl.accessToken = 'pk.eyJ1IjoicGRuYWlrIiwiYSI6ImNqdHF1NHZ4bjA1Z3M0M3BsbjdmMm5iankifQ.iBLKK8ExatGKCwZyxpGhLw';
 var map = new mapboxgl.Map({
 container: 'map',
-style: 'mapbox://styles/mapbox/streets-v11',
+style: 'mapbox://styles/omkar21/cju2q4eo50n2f1fqlq6iwla80',
 center: [-79.4512, 43.6568],
 zoom: 13
 });
